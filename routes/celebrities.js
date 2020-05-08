@@ -5,10 +5,20 @@ const Celebrity = require('../models/celebrity');
 //get a list of all celebrities
 //the endpoint should be /celebrities
 
-//Get all celebrities from celebrity model
-//endpoint: /celebrities
-// res.send("new text");
-celebritiesRouter.get ('/', async (req, res) => {  
+celebritiesRouter.get ('/', (req, res) => {  
+    //console.log('endpoint reached')  
+    Celebrity.find()
+    .then(celebrity => {
+        console.log(celebrity)
+        res.render('celebrities/index', {celebrity})})
+    .catch(error => {
+        console.error('Error finding celebrities', error);
+      });
+});
+
+// See the details of a celebrity
+
+celebritiesRouter.get ('/', (req, res) => {  
     //console.log('endpoint reached')  
     Celebrity.find()
     .then(celebrity => {
@@ -20,12 +30,20 @@ celebritiesRouter.get ('/', async (req, res) => {
 });
 
 
-// celebrityRouter.post ('/create', (req, res) => {
-//     //endpoint: /celebrities/create
-//     //create a new celebrity
-// })
+celebritiesRouter.get('/:id', (req, res, next) => {
+    console.log('endpoint reached')  
 
-//get a specific celebrity
+    const id = req.params.id;
+    console.log(id)  
+
+    Celebrity.findById(id)
+    .then(celebrity => {
+        res.render('celebrities/show', {celebrity})})
+    .catch(error => {
+        console.error('Error finding celebrities', error);
+      });
+});
+
 
 
 module.exports = celebritiesRouter
