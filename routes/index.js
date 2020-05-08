@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express'); // use express library to create router
 const router = express.Router();
 
 // Handle GET request for website root
