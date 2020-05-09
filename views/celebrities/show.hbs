@@ -1,9 +1,8 @@
 
 <h2>Celebrity</h2>
 
-<div>{{ name }}</div>
-</br>
-<div>{{ occupation  }}</div>
-</br>
-<div>{{ catchPhrase }}</div>
-</br>
+{{#with celebrity}}
+{{name}}
+{{occupation}}
+{{catchPhrase}}
+{{/with}}

@@ -22,7 +22,7 @@ celebritiesRouter.get ('/', (req, res) => {
     //console.log('endpoint reached')  
     Celebrity.find()
     .then(celebrity => {
-        console.log(celebrity)
+        // console.log(celebrity)
         res.render('celebrities/index', {celebrity})})
     .catch(error => {
         console.error('Error finding celebrities', error);
@@ -30,19 +30,30 @@ celebritiesRouter.get ('/', (req, res) => {
 });
 
 
+// celebritiesRouter.get('/:id', (req, res) => {
+//     console.log('endpoint reached')  
+
+//     const id = req.params.id;
+//     console.log(id)  
+
+//     Celebrity.findOne( {_id: id})
+//     .then(celebrity => {
+//         res.render('celebrities/show', {celebrity})})
+//     .catch(error => {
+//         console.error('Error finding celebrities', error);
+//       });
+// });
+
 celebritiesRouter.get('/:id', (req, res, next) => {
-    console.log('endpoint reached')  
-
     const id = req.params.id;
-    console.log(id)  
-
-    Celebrity.findById(id)
+    Celebrity.findOne( {_id: id})
     .then(celebrity => {
-        res.render('celebrities/show', {celebrity})})
+        res.render('celebrities/show', {celebrity})
+    })
     .catch(error => {
-        console.error('Error finding celebrities', error);
-      });
-});
+      next(error);
+    });
+  })
 
 
 
