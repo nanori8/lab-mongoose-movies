@@ -40,19 +40,17 @@ celebritiesRouter.post('/create', (req, res, next) => {
     const name = req.body.name;
     const occupation = req.body.occupation;
     const catchPhrase = req.body.catchPhrase;
-    const id = req.body._id;
-    
+        
     return Celebrity.create({
         name, 
         occupation, 
-        catchPhrase, 
-        id
+        catchPhrase
     })
     .then(celebrity => {
-        res.redirect(`/celebrities/${id}`);
+        res.redirect(`/celebrities`);
     })
     .catch(error => {
-        next(error);
+        res.redirect(`/celebrities/create`);
     });
 });
 
