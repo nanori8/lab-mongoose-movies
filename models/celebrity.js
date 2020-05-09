@@ -6,8 +6,7 @@ const celebritySchema = new mongoose.Schema({
     //   minlength: 3,
     }, 
     occupation: {
-      type: String,
-      default: 'unknown '
+      type: String
     },
     catchPhrase : {
       type: String,
