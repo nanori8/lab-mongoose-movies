@@ -30,31 +30,19 @@ celebritiesRouter.get ('/', (req, res) => {
 });
 
 
-// celebritiesRouter.get('/:id', (req, res) => {
-//     console.log('endpoint reached')  
+celebritiesRouter.get('/:id', (req, res) => {
+    console.log('endpoint reached')  
 
-//     const id = req.params.id;
-//     console.log(id)  
-
-//     Celebrity.findOne( {_id: id})
-//     .then(celebrity => {
-//         res.render('celebrities/show', {celebrity})})
-//     .catch(error => {
-//         console.error('Error finding celebrities', error);
-//       });
-// });
-
-celebritiesRouter.get('/:id', (req, res, next) => {
     const id = req.params.id;
-    Celebrity.findOne( {_id: id})
-    .then(celebrity => {
-        res.render('celebrities/show', {celebrity})
-    })
-    .catch(error => {
-      next(error);
-    });
-  })
+    console.log(id)  
 
+    Celebrity.findById(id)
+    .then(celebrity => {
+        res.render('celebrities/show', {celebrity})})
+    .catch(error => {
+        console.error('Error finding celebrities', error);
+      });
+});
 
 
 module.exports = celebritiesRouter
